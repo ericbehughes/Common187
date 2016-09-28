@@ -1,89 +1,59 @@
-
 package dw317.lib;
 
-import java.io.Reader;
-import java.io.Serializable;
+/*
+ * The Name class must validate the first and last names 
+ * (refer to Lab 2 where you validated the Address class).
+ *  Both first and last names must each contain at least 2
+ *   letters. In addition to letters, the characters 
+ *   ï¿½ (apostrophe), - (hyphen) and space between two letters are 
+ *   valid. All validation is case-insensitive.
+ * 
+ * */
 
-public class Email implements Serializable, Comparable<Email> {
+public class Name 
+{
 	private static final long serialVersionUID = 42031768871L;
-	private final String  address;
+	private String firstName = "Bob";
+	private String lastName= "6-";
 	
-	public Email(String address){
-		this.address = address;
+	public Name(String fN, String lN)
+	{
+		if(isValidString(fN, 2))
+			this.firstName = fN;
+		if(isValidString(lN, 2))
+			this.lastName = lN;
 	}
 	
-	public String getAddress() {
-		return address;
-	}
-	
-	public String getUserId() {
-		return getAddress().split("@")[0];
-	}
-	
-	public String getHost() {
-		return getAddress().split("@")[1];
-	}
-	
-	@Override
-	public boolean equals(Object object) {
-		if(this == object)
-			return true;
-		return false;
-	}
+	// both first and last name must be >= 2
+	// characters, apostrophe hyphen and space between two letters are valid
 	
 	/**
-	@Override
-	public String getNumber() {
+	 * 
+	 * @param name
+	 * @param type 0 equates to a name, 1 equates to being an email address to validate
+	 * @return
+	 */
+	public static boolean isValidString(String string, int minLength)
+	{
 		
-		return null;
-	}
-	
-    @Override
-  	public Scheme getType()
-	{}
-	*/
-	
-	@Override
-	public String toString() {
-		return getAddress();
-	}
-	
-	public boolean validateEmail(String email) throws IllegalArgumentException{
-		//dot cannot be first or last character of userid and no consecutive dots
-		//can't have hyphen as first or last either
-		String[] hosts = hostSplit(getHost());
-		if(checkLength(getUserId()))
+		if (string.length() < minLength)
 			return false;
-		if(!Name.isValidString(getUserId(), 1))
+		if (minLength == 1)
+			if (string.length() > 32)
+				return false;
+		
+		// cant have spaces on ends
+		// must have 2 letters minimum 
+		int space = string.indexOf(" ");
+		int apostrophe = string.indexOf("'");
+		int hyphen = string.indexOf('-');
+		int length = string.length()-1;
+		if (space == 0 || space == length || apostrophe == 0 || apostrophe == length || hyphen == 0 || hyphen == length)
 			return false;
-		for(int i = 0 ; i < hosts.length ; i++){
-			if(checkLength(hosts[i]))
-				return false;
-			if(!Name.isValidString(hosts[i], 1))
-				return false;
-		}
 		
 		return true;
 	}
-	
-	private static String[] hostSplit(String host){
-		return host.split(".");
+			
+		
+		
 	}
-	
-	private static boolean checkLength(String input) {
-		if(input.length() > 1 || input.length() < 32)
-			return false;
-		return true;
-	}
-
-
-
-	@Override
-	public int compareTo(Email o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-}
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
