@@ -8,7 +8,15 @@ public class Email implements Serializable, Comparable<Email> {
 	private final String  address;
 	
 	public Email(String address){
+		if (!validateEmail(address))
+			throw new IllegalArgumentException();
+		
 		this.address = address;
+	}
+	//
+	public Email(Email email)
+	{
+		this.address = email.address;
 	}
 	
 	public String getAddress() {
@@ -49,9 +57,11 @@ public class Email implements Serializable, Comparable<Email> {
 		if (address == null) {
 			if (other.address != null)
 				return false;
-		} else if (!address.equalsIgnoreCase(other.address))
-			return false;
+	} else if (!address.equalsIgnoreCase(other.address))
+	return false;
+		
 		return true;
+		
 	}
 	
 	/**
