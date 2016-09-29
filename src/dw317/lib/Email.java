@@ -23,11 +23,35 @@ public class Email implements Serializable, Comparable<Email> {
 		return getAddress().split("@")[1];
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
-	public boolean equals(Object object) {
-		if(this == object)
+	public final int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address.toUpperCase() == null) ? 0 : address.toUpperCase().hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public final boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		return false;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Email))
+			return false;
+		Email other = (Email) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equalsIgnoreCase(other.address))
+			return false;
+		return true;
 	}
 	
 	/**
@@ -75,12 +99,28 @@ public class Email implements Serializable, Comparable<Email> {
 		return true;
 	}
 
-
+	//Email must implement the compareTo method. Emails are naturally ordered by their case-insensitive host name, 
+	//followed by case-insensitive userid. So zhu@abc.com is before A@ba.com
 
 	@Override
 	public int compareTo(Email o) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		if (o == null)
+			throw new NullPointerException();
+		// handle if same host id
+		if (this.getHost().equalsIgnoreCase(o.getHost())){
+				if (this.getUserId().equalsIgnoreCase(o.getUserId())){
+					return 0; //same everything
+				// same host but different userID
+				}
+				else if (this.getUserId().compareToIgnoreCase(o.getUserId()) > 0)
+					return -1;
+				else if (this.getUserId().compareToIgnoreCase(o.getUserId()) < 0)
+					return 1;
+		}
+		//handle for different hosts
+		else if (this.getHost().compareToIgnoreCase(o.getHost())> 0)
+			return -1;
+		return 1;
 	}
-	
 }
