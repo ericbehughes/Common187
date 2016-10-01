@@ -20,7 +20,7 @@ public class Name
 	{
 		if (isValidString(firstName, 2) && isValidString(lastName, 2)){
 			this.firstName = firstName;
-			this.lastName = lastName;
+			this.lastName = lastName;//
 		}
 		else
 			throw new IllegalArgumentException();
