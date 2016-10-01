@@ -81,7 +81,7 @@ public class Email implements Serializable, Comparable<Email> {
 		return getAddress();
 	}
 	
-	public boolean validateEmail(String email) throws IllegalArgumentException{
+	public boolean validateEmail(String email){
 		//dot cannot be first or last character of userid and no consecutive dots
 		//can't have hyphen as first or last either
 		String[] hosts = hostSplit(getHost());

@@ -16,12 +16,20 @@ public class Name
 	private String firstName = "Bob";
 	private String lastName= "6-";
 	
-	public Name(String fN, String lN)
+	public Name(String firstName, String lastName) throws IllegalArgumentException
 	{
+		if (isValidString(firstName, 2) && isValidString(lastName, 2)){
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		else
+			throw new IllegalArgumentException();
+		/**
 		if(isValidString(fN, 2))
 			this.firstName = fN;
 		if(isValidString(lN, 2))
 			this.lastName = lN;
+		*/
 	}
 	
 	// both first and last name must be >= 2
@@ -54,6 +62,14 @@ public class Name
 		return true;
 	}
 			
-		
+	public String getFirstName()
+	{
+		return this.firstName;
+	}
+	
+	public String getLastName()
+	{
+		return this.lastName;
+	}
 		
 	}
