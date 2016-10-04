@@ -13,23 +13,23 @@ package dw317.lib;
 public class Name 
 {
 	private static final long serialVersionUID = 42031768871L;
-	private String firstName = "Bob";
-	private String lastName= "6-";
+	private String firstName;
+	private String lastName;
 	
 	public Name(String firstName, String lastName) throws IllegalArgumentException
 	{
 		if (isValidString(firstName, 2) && isValidString(lastName, 2)){
 			this.firstName = firstName;
-			this.lastName = lastName;//
+			this.lastName = lastName;
 		}
 		else
 			throw new IllegalArgumentException();
-		/**
-		if(isValidString(fN, 2))
-			this.firstName = fN;
-		if(isValidString(lN, 2))
-			this.lastName = lN;
-		*/
+	}
+	
+	public Name(Name name)
+	{
+		this.firstName = name.firstName;
+		this.lastName = name.lastName;
 	}
 	
 	// both first and last name must be >= 2

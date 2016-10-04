@@ -1,19 +1,19 @@
 package dw317.lib;
 
-import java.io.Reader;
 import java.io.Serializable;
 
 public class Email implements Serializable, Comparable<Email> {
 	private static final long serialVersionUID = 42031768871L;
-	private final String  address;
+	private final String address;
 	
 	public Email(String address){
+		
 		if (!validateEmail(address))
 			throw new IllegalArgumentException();
+		this.address = address;
 		
-		this.address = address;//
 	}
-	//
+	
 	public Email(Email email)
 	{
 		this.address = email.address;
@@ -24,11 +24,13 @@ public class Email implements Serializable, Comparable<Email> {
 	}
 	
 	public String getUserId() {
-		return getAddress().split("@")[0];
+		String str = getAddress().split("@")[0];
+		return str;
 	}
 	
 	public String getHost() {
-		return getAddress().split("@")[1];
+		String str =  getAddress().split("@")[1];
+		return str;
 	}
 	
 	/* (non-Javadoc)
@@ -64,30 +66,21 @@ public class Email implements Serializable, Comparable<Email> {
 		
 	}
 	
-	/**
-	@Override
-	public String getNumber() {
-		
-		return null;
-	}
-	
-    @Override
-  	public Scheme getType()
-	{}
-	*/
 	
 	@Override
 	public String toString() {
 		return getAddress();
 	}
 	
-	public boolean validateEmail(String email){
+	public boolean validateEmail(String address){
 		//dot cannot be first or last character of userid and no consecutive dots
 		//can't have hyphen as first or last either
-		String[] hosts = hostSplit(getHost());
-		if(checkLength(getUserId()))
+		String host = address.split("@")[1];
+		String userID = address.split("@")[0];
+		String[] hosts = hostSplit(host);
+		if(checkLength(userID))
 			return false;
-		if(!Name.isValidString(getUserId(), 1))
+		if(!Name.isValidString(userID, 1))
 			return false;
 		for(int i = 0 ; i < hosts.length ; i++){
 			if(checkLength(hosts[i]))
