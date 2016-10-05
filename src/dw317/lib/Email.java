@@ -13,7 +13,6 @@ public class Email implements Serializable, Comparable<Email> {
 		this.address = address;
 		
 	}
-	
 	public Email(Email email)
 	{
 		this.address = email.address;
