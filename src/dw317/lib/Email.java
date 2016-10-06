@@ -87,11 +87,16 @@ public class Email implements Serializable, Comparable<Email> {
 			if(!Name.isValidString(hosts[i], 1))
 				return false;
 		}
+		if (hosts.length == 0)
+			if (!Name.isValidString(host, 1))
+				return false;
+		
 		
 		return true;
 	}
 	
 	private static String[] hostSplit(String host){
+		
 		return host.split(".");
 	}
 	

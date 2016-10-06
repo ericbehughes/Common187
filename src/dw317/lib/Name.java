@@ -12,6 +12,8 @@ package dw317.lib;
 
 public class Name 
 {
+	
+
 	private static final long serialVersionUID = 42031768871L;
 	private String firstName;
 	private String lastName;
@@ -49,7 +51,6 @@ public class Name
 		if (minLength == 1)
 			if (string.length() > 32)
 				return false;
-		
 		// cant have spaces on ends
 		// must have 2 letters minimum 
 		int space = string.indexOf(" ");
@@ -60,6 +61,11 @@ public class Name
 			return false;
 		
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return this.firstName + "*"+ this.lastName;
 	}
 			
 	public String getFirstName()
