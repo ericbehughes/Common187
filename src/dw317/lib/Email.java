@@ -11,7 +11,7 @@ public class Email implements Serializable, Comparable<Email> {
 		if (!validateEmail(address))
 			throw new IllegalArgumentException();
 		this.address = address;
-		//
+		//.///
 	}
 	public Email(Email email)
 	{

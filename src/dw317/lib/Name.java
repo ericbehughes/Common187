@@ -35,6 +35,11 @@ public class Name
 	// both first and last name must be >= 2
 	// characters, apostrophe hyphen and space between two letters are valid
 	
+	@Override
+	public String toString() {
+		return getFirstName()+ "*" + getLastName();
+	}
+
 	/**
 	 * 
 	 * @param name
