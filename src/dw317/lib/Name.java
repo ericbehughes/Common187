@@ -1,5 +1,6 @@
 package dw317.lib;
 
+// TODO: Auto-generated Javadoc
 /*
  * The Name class must validate the first and last names 
  * (refer to Lab 2 where you validated the Address class).
@@ -10,14 +11,29 @@ package dw317.lib;
  * 
  * */
 
+/**
+ * The Class Name.
+ */
 public class Name 
 {
 	
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
+	
+	/** The first name. */
 	private String firstName;
+	
+	/** The last name. */
 	private String lastName;
 	
+	/**
+	 * Instantiates a new name.
+	 *
+	 * @param firstName the first name
+	 * @param lastName the last name
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	public Name(String firstName, String lastName) throws IllegalArgumentException
 	{
 		if (isValidString(firstName, 2) && isValidString(lastName, 2)){
@@ -28,6 +44,11 @@ public class Name
 			throw new IllegalArgumentException();
 	}
 	
+	/**
+	 * Instantiates a new name.
+	 *
+	 * @param name the name
+	 */
 	public Name(Name name)
 	{
 		this.firstName = name.firstName;
@@ -38,10 +59,11 @@ public class Name
 	// characters, apostrophe hyphen and space between two letters are valid
 	
 	/**
-	 * 
-	 * @param name
-	 * @param type 0 equates to a name, 1 equates to being an email address to validate
-	 * @return
+	 * Checks if is valid string.
+	 *
+	 * @param string the string
+	 * @param minLength the min length
+	 * @return true, if is valid string
 	 */
 	public static boolean isValidString(String string, int minLength)
 	{
@@ -63,16 +85,29 @@ public class Name
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return this.firstName + "*"+ this.lastName;
 	}
 			
+	/**
+	 * Gets the first name.
+	 *
+	 * @return the first name
+	 */
 	public String getFirstName()
 	{
 		return this.firstName;
 	}
 	
+	/**
+	 * Gets the last name.
+	 *
+	 * @return the last name
+	 */
 	public String getLastName()
 	{
 		return this.lastName;

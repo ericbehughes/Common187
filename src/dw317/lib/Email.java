@@ -2,10 +2,23 @@ package dw317.lib;
 
 import java.io.Serializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Email.
+ */
 public class Email implements Serializable, Comparable<Email> {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
+	
+	/** The address. */
 	private final String address;
 	
+	/**
+	 * Instantiates a new email.
+	 *
+	 * @param address the address
+	 */
 	public Email(String address){
 		
 		if (!validateEmail(address))
@@ -13,20 +26,41 @@ public class Email implements Serializable, Comparable<Email> {
 		this.address = address;
 		//
 	}
+	
+	/**
+	 * Instantiates a new email.
+	 *
+	 * @param email the email
+	 */
 	public Email(Email email)
 	{
 		this.address = email.address;
 	}
 	
+	/**
+	 * Gets the address.
+	 *
+	 * @return the address
+	 */
 	public String getAddress() {
 		return address;
 	}
 	
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
 	public String getUserId() {
 		String str = getAddress().split("@")[0];
 		return str;
 	}
 	
+	/**
+	 * Gets the host.
+	 *
+	 * @return the host
+	 */
 	public String getHost() {
 		String str =  getAddress().split("@")[1];
 		return str;
@@ -66,11 +100,20 @@ public class Email implements Serializable, Comparable<Email> {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return getAddress();
 	}
 	
+	/**
+	 * Validate email.
+	 *
+	 * @param address the address
+	 * @return true, if successful
+	 */
 	public boolean validateEmail(String address){
 		//dot cannot be first or last character of userid and no consecutive dots
 		//can't have hyphen as first or last either
@@ -95,11 +138,23 @@ public class Email implements Serializable, Comparable<Email> {
 		return true;
 	}
 	
+	/**
+	 * Host split.
+	 *
+	 * @param host the host
+	 * @return the string[]
+	 */
 	private static String[] hostSplit(String host){
 		
 		return host.split(".");
 	}
 	
+	/**
+	 * Check length.
+	 *
+	 * @param input the input
+	 * @return true, if successful
+	 */
 	private static boolean checkLength(String input) {
 		if(input.length() > 1 || input.length() < 32)
 			return false;
@@ -109,6 +164,9 @@ public class Email implements Serializable, Comparable<Email> {
 	//Email must implement the compareTo method. Emails are naturally ordered by their case-insensitive host name, 
 	//followed by case-insensitive userid. So zhu@abc.com is before A@ba.com
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(Email o) {
 		
