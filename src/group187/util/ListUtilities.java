@@ -2,28 +2,33 @@ package group187.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class ListUtilities {
 	private ListUtilities(){}
-	
+	public static int recordCount;
 	@SuppressWarnings("null")
 	public static void saveListToTextFile(Comparable[] array, File file) throws FileNotFoundException {
 		if (array == null)
 			throw new IllegalArgumentException("The array "+array.toString() +" is null");
 		if (!file.exists())
 			throw new FileNotFoundException("The file cannot be found");
-		
-		try {
-			PrintWriter pw = new PrintWriter(file);
-			for (int i = 0; i < array.length; i++) {
-				pw.println(array[i]);
-				pw.close();
-			}
-		} catch (FileNotFoundException fne) {
-			System.out.println(fne.getMessage());
-		} 
+		PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(new FileOutputStream(new File(file.getPath()),true));
+            for (int i = 0; i < array.length; i++) {
+                printWriter.println(array[i].toString());
+                recordCount++;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (printWriter != null) {
+                printWriter.close();
+            }
+        }
 		
 	}
 	
