@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
+
 
 public class ListUtilities {
 	private ListUtilities(){}
@@ -23,7 +25,7 @@ public class ListUtilities {
                 recordCount++;
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            
         } finally {
             if (printWriter != null) {
                 printWriter.close();
@@ -122,6 +124,18 @@ public class ListUtilities {
 				return false;
 		return true;
 	}
+    
+	/**
+	 * The method must merge two sorted object lists referenced by list1 and list2 into a third
+	object list (created in the merge method). When the lists have been merged, the merge
+	method returns a reference to the third object list. NOTE: this method must be efficient!
+	Take advantage of the fact that the two lists are already sorted!
+	In order to create the third list from within the merge method with the same base ty
+	pe as those of the arrays that you are merging, you will have to use the approach below.
+	This is necessary to ensure that you will not end up with a ClassCastException
+	when you cast the array returned from the merge array to a Customer[ ] or a
+	Reservation[] in the application class
+	 */
 	/*
 	* Efficiently merges two sorted lists of objects in ascending
 	* natural order. If the duplicate objects are in both lists,
@@ -152,21 +166,32 @@ public class ListUtilities {
 	* null.
 	*/
 	 	//@SuppressWarnings({ "rawtypes", "unchecked" })
-//	public static Comparable[] merge(Comparable[] list1,Comparable[] list2, String duplicateFileName)throws IOException{
-		
-		/**
-		 * The method must merge two sorted object lists referenced by list1 and list2 into a third
-		object list (created in the merge method). When the lists have been merged, the merge
-		method returns a reference to the third object list. NOTE: this method must be efficient!
-		Take advantage of the fact that the two lists are already sorted!
-		In order to create the third list from within the merge method with the same base ty
-		pe as those of the arrays that you are merging, you will have to use the approach below.
-		This is necessary to ensure that you will not end up with a ClassCastException
-		when you cast the array returned from the merge array to a Customer[ ] or a
-		Reservation[] in the application class
-		 */
-	 		
-	 		
-	//}
+	@SuppressWarnings("unchecked")
+	public static Comparable[] merge(Comparable[] list1,Comparable[] list2, String duplicateFileName)throws IOException{
+			
+		if (list1 == null || list2 == null)
+			throw new NullPointerException("list is null");
+				
+		Comparable[] mergedArray = (Comparable[]) Array.newInstance(
+				list1.getClass().getComponentType(), list1.length + list2.length);
 
+			    int i = list1.length - 1, j = list2.length - 1, k = mergedArray.length;
+			   /* If the equal objects appears in both of the lists that are being merged (whether the lists
+			    		contain Customers or Reservations), merge the customer or reservation from list1 and
+			    		record the identical customer or reservation in the duplicates file (which must be stored in
+			    		a directory called datafiles\duplicates)*/
+			    File duplicatesFile = new File("datafiles/duplicates/duplicates.txt");
+			    if (list1[i].getClass() == list2[i].getClass())
+			    while (k > 0){
+			    	if (j < 0 || (i >= 0 && list1[i].compareTo(list2[j]) == 0))
+							if (mergedArray[--k].getClass().equals("Reservation"))
+			    				saveListToTextFile(list1, duplicatesFile);
+			    			if (mergedArray[--k].getClass().equals("Customer"))
+			    				saveListToTextFile(list1, duplicatesFile);
+			    			
+			        mergedArray[--k] =  (j < 0 || (i >= 0 && list1[i].compareTo(list2[j]) > 0) ? list1[i--] : list2[j--]);
+			    }
+	 		
+			    return mergedArray;
+	}
 }
