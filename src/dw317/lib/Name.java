@@ -80,7 +80,7 @@ public class Name
 		
 		 // String to be scanned to find the pattern.
 	      
-	      String pattern = "^[a-zA-Z0-9]*$";
+	      String pattern = "^[a-zA-Z0-9].[a-zA-Z0-9]$";
 	      // Create a Pattern object
 	      Pattern r = Pattern.compile(pattern);
 
