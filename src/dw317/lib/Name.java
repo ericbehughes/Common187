@@ -1,5 +1,8 @@
 package dw317.lib;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 // TODO: Auto-generated Javadoc
 /*
  * The Name class must validate the first and last names 
@@ -74,15 +77,16 @@ public class Name
 		if (minLength == 1)
 			if (string.length() > 32)
 				return false;
-		// cant have spaces on ends
-		// must have 2 letters minimum 
-		int space = string.indexOf(" ");
-		int apostrophe = string.indexOf("'");
-		int hyphen = string.indexOf('-');
-		int length = string.length()-1;
-		if (space == 0 || space == length || apostrophe == 0 || apostrophe == length || hyphen == 0 || hyphen == length)
-			return false;
 		
+		 // String to be scanned to find the pattern.
+	      
+	      String pattern = "^[a-zA-Z0-9]*$";
+	      // Create a Pattern object
+	      Pattern r = Pattern.compile(pattern);
+
+	      // Now create matcher object.
+	      Matcher m = r.matcher(string);
+	      if(m.find());
 		return true;
 	}
 	
