@@ -166,9 +166,9 @@ public class Email implements Serializable, Comparable<Email> {
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	/*
 	@Override
 	public int compareTo(Email o) {
-		
 		if (o == null)
 			throw new NullPointerException();
 		// handle if same host id
@@ -187,4 +187,25 @@ public class Email implements Serializable, Comparable<Email> {
 			return -1;
 		return 1;
 	}
+		*/
+	
+	@Override
+	public int compareTo(Email o){
+		// Check if the object is null
+		if (o == null)
+			throw new NullPointerException("The object is null");
+		
+		String thisHost = getHost().toLowerCase(), // Extract local host
+			   objHost = o.getHost().toLowerCase(), // Extract object host
+			   thisUserId = getUserId().toLowerCase(), // Extract the local user id
+			   objUserId = o.getUserId().toLowerCase(); // Extract the object user id
+		
+		if (thisHost.equals(objHost))
+			return thisUserId.compareTo(objUserId);
+		else
+			return thisHost.compareTo(objHost);
+				
+		
+	}
 }
+	
