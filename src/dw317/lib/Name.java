@@ -72,22 +72,28 @@ public class Name
 	public static boolean isValidString(String string, int minLength)
 	{
 		
-		if (string.length() < minLength)
+		if (minLength <= 0)
+			throw new IllegalArgumentException("The minimum length cannot be less than or equal to 0");
+	
+		 if (string.length() < minLength)
 			return false;
-		if (minLength == 1)
-			if (string.length() > 32)
-				return false;
 		
-		 // String to be scanned to find the pattern.
-	      
-	      String pattern = "^[a-zA-Z0-9].[a-zA-Z0-9]$";
-	      // Create a Pattern object
-	      Pattern r = Pattern.compile(pattern);
-
-	      // Now create matcher object.
-	      Matcher m = r.matcher(string);
-	      if(m.find());
-		return true;
+		if (string.length() > 32)
+			return false;
+			
+			
+		if (minLength == 1){		      
+			if (string.length() > minLength){
+			      String regex = "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$";
+			      return string.matches(regex);
+			}
+				
+		}
+		else{
+			String regex = "^[A-Z][a-z]{2,}\\-[a-z]$"
+			if (string.length() > minLength)
+		}
+		
 	}
 	
 	/* (non-Javadoc)
