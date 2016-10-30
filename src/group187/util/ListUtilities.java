@@ -21,11 +21,14 @@ public class ListUtilities {
         try {
             printWriter = new PrintWriter(new FileOutputStream(new File(file.getPath()),true));
             for (int i = 0; i < array.length; i++) {
+            	if (array[i] == null)
+            		continue;
                 printWriter.println(array[i].toString());
                 recordCount++;
             }
-        } catch (Exception npe) {
-        	System.out.println("cant print to file"); 
+        } catch (NullPointerException npe) {
+        	System.out.println("cant print to file");
+        	npe.printStackTrace();
             
         } finally {
             if (printWriter != null) {
@@ -173,25 +176,39 @@ public class ListUtilities {
 		if (list1 == null || list2 == null)
 			throw new NullPointerException("list is null");
 				
-		Comparable[] mergedArray = (Comparable[]) Array.newInstance(
-				list1.getClass().getComponentType(), list1.length + list2.length);
-
-			    int i = list1.length - 1, j = list2.length - 1, k = mergedArray.length;
-			   /* If the equal objects appears in both of the lists that are being merged (whether the lists
-			    		contain Customers or Reservations), merge the customer or reservation from list1 and
-			    		record the identical customer or reservation in the duplicates file (which must be stored in
-			    		a directory called datafiles\duplicates)*/
-			    File duplicatesFile = new File("datafiles/duplicates/duplicates.txt");
-			    if (list1[i].getClass() == list2[i].getClass())
-			    while (k > 0){
-			    	if (j < 0 || (i >= 0 && list1[i].compareTo(list2[j]) == 0))
-							if (mergedArray[--k].getClass().equals("Reservation"))
-			    				saveListToTextFile(list1, duplicatesFile);
-			    			if (mergedArray[--k].getClass().equals("Customer"))
-			    				saveListToTextFile(list1, duplicatesFile);
-			    			
-			        mergedArray[--k] =  (j < 0 || (i >= 0 && list1[i].compareTo(list2[j]) > 0) ? list1[i--] : list2[j--]);
-			    }
+	//	Comparable[] mergedArray = (Comparable[]) Array.newInstance(
+		//		list1.getClass().getComponentType(), list1.length + list2.length);
+		 Comparable[] list1 = {2, 54, 67, 2, 3, 4},
+			      list2 = {3, 7, 8, 32, 45, 6},
+			      list3 = new Comparable[12];
+			int l1counter = 0;
+			int l2counter = 0;
+			
+			for (int i =0; i < list1.length + list2.length; i++)
+			{
+				if (l1counter != list1.length && l2counter != list2.length)
+				{
+					if (list1[l1counter].compareTo(list2[l2counter]) < 0)
+						l1counter++;
+					else
+						list3[i] = list2[l2counter];
+				
+				}
+				else
+				{
+					if (l1counter == list1.length)
+					{
+						mergedArray[i] = list2[l2counter];
+						l2counter++;
+					}
+					else
+					{
+						mergedArray[i] = list1[l1counter];
+						l1counter++;
+					}
+				}
+			}
+				
 	 		
 			    return mergedArray;
 	}
