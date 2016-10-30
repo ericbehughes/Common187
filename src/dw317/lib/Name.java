@@ -71,28 +71,23 @@ public class Name
 	 */
 	public static boolean isValidString(String string, int minLength)
 	{
-		
 		if (minLength <= 0)
-			throw new IllegalArgumentException("The minimum length cannot be less than or equal to 0");
+			return false;
 	
-		 if (string.length() < minLength)
+		if (string.length() < minLength|| string.length() > 32)
 			return false;
-		
-		if (string.length() > 32)
-			return false;
-			
-			
-		if (minLength == 1){		      
-			if (string.length() > minLength){
-			      String regex = "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$";
+		 String regex;
+		switch(minLength){
+			case 1:
+				  regex = "^[A-Za-z0-9]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$";//
 			      return string.matches(regex);
-			}
-				
+			case 2: 
+				regex = "^[A-Za-z][a-z]{2,}\\-[a-z]$";
+				return string.matches(regex);
+		default:
+				System.out.println("no valid string");
 		}
-		else{
-			String regex = "^[A-Z][a-z]{2,}\\-[a-z]$"
-			if (string.length() > minLength)
-		}
+		return false;
 		
 	}
 	

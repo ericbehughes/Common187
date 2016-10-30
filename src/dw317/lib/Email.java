@@ -21,8 +21,8 @@ public class Email implements Serializable, Comparable<Email> {
 	 */
 	public Email(String address){
 		
-		if (!validateEmail(address))
-			throw new IllegalArgumentException();
+		if (!Name.isValidString(address, 1))
+			throw new IllegalArgumentException("invalid email format");
 		this.address = address;
 	}
 	
@@ -112,7 +112,7 @@ public class Email implements Serializable, Comparable<Email> {
 	 *
 	 * @param address the address
 	 * @return true, if successful
-	 */
+	 
 	public boolean validateEmail(String address){
 		//dot cannot be first or last character of userid and no consecutive dots
 		//can't have hyphen as first or last either
@@ -136,7 +136,7 @@ public class Email implements Serializable, Comparable<Email> {
 		
 		return true;
 	}
-	
+	*/
 	/**
 	 * Host split.
 	 *
@@ -187,7 +187,7 @@ public class Email implements Serializable, Comparable<Email> {
 			return -1;
 		return 1;
 	}
-		*/
+		*/////
 	
 	@Override
 	public int compareTo(Email o){
