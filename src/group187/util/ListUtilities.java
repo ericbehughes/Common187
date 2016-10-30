@@ -170,46 +170,50 @@ public class ListUtilities {
 	* null.
 	*/
 	 	//@SuppressWarnings({ "rawtypes", "unchecked" })
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1,Comparable[] list2, String duplicateFileName)throws IOException{
 			
 		if (list1 == null || list2 == null)
 			throw new NullPointerException("list is null");
-				
-	//	Comparable[] mergedArray = (Comparable[]) Array.newInstance(
-		//		list1.getClass().getComponentType(), list1.length + list2.length);
-		 Comparable[] list1 = {2, 54, 67, 2, 3, 4},
-			      list2 = {3, 7, 8, 32, 45, 6},
-			      list3 = new Comparable[12];
-			int l1counter = 0;
-			int l2counter = 0;
-			
-			for (int i =0; i < list1.length + list2.length; i++)
-			{
-				if (l1counter != list1.length && l2counter != list2.length)
-				{
-					if (list1[l1counter].compareTo(list2[l2counter]) < 0)
-						l1counter++;
-					else
-						list3[i] = list2[l2counter];
-				
-				}
-				else
-				{
-					if (l1counter == list1.length)
+					     Comparable[] list3 = new Comparable[list1.length+list2.length];
+					int l1counter = 0;
+					int l2counter = 0;
+					
+					for (int i =0; i < list1.length + list2.length-1; i++)
 					{
-						mergedArray[i] = list2[l2counter];
-						l2counter++;
+						if (l1counter != list1.length && l2counter != list2.length)
+						{
+							if (list1[l1counter].compareTo(list2[l2counter]) < 0){
+								list3[i] = list1[l1counter];
+								l1counter++;
+							}
+							else{
+								list3[i] = list2[l2counter];
+								l2counter++;
+							}
+						
+						}
+						else
+						{
+							if (l1counter == list1.length)
+							{
+								list3[i] = list2[l2counter];
+								l2counter++;
+							}
+							else
+							{
+								list3[i] = list1[l1counter];
+								l1counter++;
+							}
+						}
 					}
-					else
-					{
-						mergedArray[i] = list1[l1counter];
-						l1counter++;
-					}
-				}
+						
+			 			for (@SuppressWarnings("rawtypes") Comparable arr : list3)
+			 				System.out.println(arr.toString());
+			return list3;
 			}
 				
-	 		
-			    return mergedArray;
+
+
 	}
 }
