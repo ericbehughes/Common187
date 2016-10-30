@@ -79,7 +79,7 @@ public class Name
 		 String regex;
 		switch(minLength){
 			case 1:
-				  regex = "^[A-Za-z0-9]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$";//
+				  regex = "^[A-Za-z0-9]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$";
 			      return string.matches(regex);
 			case 2: 
 				regex = "^[A-Za-z][a-z]{2,}\\-[a-z]$";
