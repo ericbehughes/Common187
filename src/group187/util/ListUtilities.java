@@ -175,10 +175,8 @@ public class ListUtilities {
 	 	//@SuppressWarnings({ "rawtypes", "unchecked" })
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1,Comparable[] list2, String duplicateFileName)throws IOException{
-			
-		Comparable[] list1 = {5, 7, 8, 77, 88, 111},
-			      list2 = {2, 3, 5, 7, 10, 55},
-			      list3 =  (Comparable[]) Array.newInstance(
+		
+			      Comparable[] list3 =  (Comparable[]) Array.newInstance(
 			    		  list1.getClass().getComponentType(), list1.length + list2.length);
 			int l1counter = 0;
 			int l2counter = 0;
@@ -202,7 +200,7 @@ public class ListUtilities {
 				{
 					if (isReservation){
 						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), file);
+							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), duplicates);
 						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) < 0){
 							list3[i] = list1[l1counter];
 							l1counter++;
@@ -216,7 +214,7 @@ public class ListUtilities {
 					
 					else if (isCustomer){
 						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), file);
+							ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), duplicates);
 						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) < 0){
 							list3[i] = list1[l1counter];
 							l1counter++;
@@ -246,6 +244,7 @@ public class ListUtilities {
 	 			for (Comparable arr : list3)
 	 				System.out.println(arr.toString());
 	 			System.out.println(duplicates);
+	 			return list3;
 	}
 				
 
