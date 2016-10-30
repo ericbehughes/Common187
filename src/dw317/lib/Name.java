@@ -74,21 +74,17 @@ public class Name
 		if (minLength <= 0)
 			return false;
 	
-		if (string.length() < minLength|| string.length() > 32)
+		if (string.length() < minLength|| string.length() > 64)
 			return false;
 		 String regex;
 		switch(minLength){
-			case 1:
-				//regex = "^[_A-Za-z0-9+]+(\\.[_A-Za-z0-9-']+)*@"
-				//		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-				        
-				regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+			case 1:	
+				regex = "^[A-Za-z0-9]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 			      return string.matches(regex);
 			case 2: 
-				regex = "[A-Za-z]{2,32}";
-				return string.matches(regex);
+				return true;
 		default:
-				System.out.println("no valid string");
+				
 		}
 		return false;
 		
