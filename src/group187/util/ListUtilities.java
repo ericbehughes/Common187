@@ -25,7 +25,7 @@ public class ListUtilities {
                 recordCount++;
             }
         } catch (Exception npe) {
-        	System.out.println("cant print to file");
+        	System.out.println("cant print to file"); 
             
         } finally {
             if (printWriter != null) {

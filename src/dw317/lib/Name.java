@@ -76,6 +76,21 @@ public class Name
 	
 		if (string.length() < minLength|| string.length() > 64)
 			return false;
+		
+		 String regex;
+		  switch(minLength){
+		   case 1: 
+		    regex = "^[_A-Za-z0-9-]+(\\.{0,1}[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		         return string.matches(regex);
+		   case 2: 
+		    if (string.length() > 32)
+		     return false;
+		    return string.matches("^[\\p{L} .'-]+$");
+		    //return string.matches("[A-Za-z]+\\s?[A-za-z'-]{0,}[A-Za-z]$");
+		    //return string.matches("[A-Za-z]+\\s{0,1}[A-za-z'-]");
+		  default:
+		  }
+		/*
 		 String regex;
 		switch(minLength){
 			case 1:	
@@ -84,8 +99,9 @@ public class Name
 			case 2: 
 				return true;
 		default:
+			
 				
-		}
+		}*/
 		return false;
 		
 	}
