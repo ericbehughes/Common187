@@ -79,10 +79,11 @@ public class Name
 		 String regex;
 		switch(minLength){
 			case 1:
-				  regex = "^[A-Za-z0-9]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$";
+				 regex = "[A-Za-z0-9][A-Za-z0-9-_]*@{1}[A-Za-z0-9\\.-]{1,32}\\.[A-Za-z0-9]{2,3}";
+				
 			      return string.matches(regex);
 			case 2: 
-				regex = "^[A-Za-z][a-zA-Z-]{2,}";
+				regex = "[A-Za-z-]{2,32}";
 				return string.matches(regex);
 		default:
 				System.out.println("no valid string");

@@ -113,40 +113,7 @@ public class Email implements Serializable, Comparable<Email> {
 	 * @param address the address
 	 * @return true, if successful
 	 
-	public boolean validateEmail(String address){
-		//dot cannot be first or last character of userid and no consecutive dots
-		//can't have hyphen as first or last either
-		String host = address.split("@")[1];
-		String userID = address.split("@")[0];
-		String[] hosts = hostSplit(host);
-		if(checkLength(userID))
-			return false;
-		if(!Name.isValidString(userID, 1))
-			return false;
-		for(int i = 0 ; i < hosts.length ; i++){
-			if(checkLength(hosts[i]))
-				return false;
-			if(!Name.isValidString(hosts[i], 1))
-				return false;
-		}
-		if (hosts.length == 0)
-			if (!Name.isValidString(host, 1))
-				return false;
-		
-		
-		return true;
-	}
-	*/
-	/**
-	 * Host split.
-	 *
-	 * @param host the host
-	 * @return the string[]
-	 */
-	private static String[] hostSplit(String host){
-		
-		return host.split(".");
-	}
+	
 	
 	/**
 	 * Check length.
