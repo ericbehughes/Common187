@@ -44,7 +44,7 @@ public class Name
 			this.lastName = lastName;
 		}
 		else
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("invalid string format for" + firstName + "and" + lastName);
 	}
 	
 	/**
@@ -79,11 +79,13 @@ public class Name
 		 String regex;
 		switch(minLength){
 			case 1:
-				 regex = "[A-Za-z0-9][A-Za-z0-9-_]*@{1}[A-Za-z0-9\\.-]{1,32}\\.[A-Za-z0-9]{2,3}";
-				
+				//regex = "^[_A-Za-z0-9+]+(\\.[_A-Za-z0-9-']+)*@"
+				//		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+				        
+				regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 			      return string.matches(regex);
 			case 2: 
-				regex = "[A-Za-z-]{2,32}";
+				regex = "[A-Za-z]{2,32}";
 				return string.matches(regex);
 		default:
 				System.out.println("no valid string");
