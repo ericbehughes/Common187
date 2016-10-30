@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 
+import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
+
 
 public class ListUtilities {
 	private ListUtilities(){}
@@ -173,47 +176,79 @@ public class ListUtilities {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1,Comparable[] list2, String duplicateFileName)throws IOException{
 			
-		if (list1 == null || list2 == null)
-			throw new NullPointerException("list is null");
-					     Comparable[] list3 = new Comparable[list1.length+list2.length];
-					int l1counter = 0;
-					int l2counter = 0;
-					
-					for (int i =0; i < list1.length + list2.length-1; i++)
-					{
-						if (l1counter != list1.length && l2counter != list2.length)
-						{
-							if (list1[l1counter].compareTo(list2[l2counter]) < 0){
-								list3[i] = list1[l1counter];
-								l1counter++;
-							}
-							else{
-								list3[i] = list2[l2counter];
-								l2counter++;
-							}
-						
-						}
-						else
-						{
-							if (l1counter == list1.length)
-							{
-								list3[i] = list2[l2counter];
-								l2counter++;
-							}
-							else
-							{
-								list3[i] = list1[l1counter];
-								l1counter++;
-							}
-						}
-					}
-						
-			 			for (@SuppressWarnings("rawtypes") Comparable arr : list3)
-			 				System.out.println(arr.toString());
-			return list3;
+		Comparable[] list1 = {5, 7, 8, 77, 88, 111},
+			      list2 = {2, 3, 5, 7, 10, 55},
+			      list3 =  (Comparable[]) Array.newInstance(
+			    		  list1.getClass().getComponentType(), list1.length + list2.length);
+			int l1counter = 0;
+			int l2counter = 0;
+			boolean isReservation = false;
+			boolean isCustomer = false;
+			File duplicates = new File("datafiles/duplicates/mergeduplicates.txt");
+			duplicates.createNewFile();
+			
+			if (list1[0] != null){
+				if (list1[0] instanceof Reservation)
+					isReservation = true;
+				else if (list1[0] instanceof Customer)
+					isCustomer = true;
 			}
+			else
+				return list3;
+			
+			for (int i =0; i < list1.length + list2.length; i++)
+			{
+				if (l1counter != list1.length && l2counter != list2.length)
+				{
+					if (isReservation){
+						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) == 0)
+							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), file);
+						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) < 0){
+							list3[i] = list1[l1counter];
+							l1counter++;
+						}
+						else{
+							list3[i] = list2[l2counter];
+							l2counter++;
+						}
+					
+					}
+					
+					else if (isCustomer){
+						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) == 0)
+							ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), file);
+						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) < 0){
+							list3[i] = list1[l1counter];
+							l1counter++;
+						}
+						else{
+							list3[i] = list2[l2counter];
+							l2counter++;
+						}
+					
+					}
+				}
+				else
+				{
+					if (l1counter == list1.length)
+					{
+						list3[i] = list2[l2counter];
+						l2counter++;
+					}
+					else
+					{
+						list3[i] = list1[l1counter];
+						l1counter++;
+					}
+				}
+			}
+				
+	 			for (Comparable arr : list3)
+	 				System.out.println(arr.toString());
+	 			System.out.println(duplicates);
+	}
 				
 
 
-	}
+	
 }
