@@ -40,6 +40,9 @@ public class SortMergeApp {
 					System.out.println("record count for customers " + ListUtilities.recordCount);
 					ListUtilities.recordCount = 0;
 				System.out.println("customers done");
+				
+				
+				
 			
 				try {
 					//create giant list with all customers
@@ -82,10 +85,7 @@ public class SortMergeApp {
 				
 				
 				ListUtilities.sort(customerArray);
-				System.out.println("\n\nsorted array\n");
-				for (Customer arr: customerArray)
-					System.out.println(arr.toString());
-				System.out.println("\n");
+				
 				
 				File duplicates = new File("datafiles/duplicates/duplicates.txt");
 				try {
@@ -95,17 +95,23 @@ public class SortMergeApp {
 					e1.printStackTrace();
 				}
 				try {
-					Customer[] array = (Customer[]) ListUtilities.merge(customerArray, customerArray, duplicates);
-					
-					
-					
-				} catch (IOException e) {
+					Customer[] array1  = HotelFileLoader.getCustomerListFromSequentialFile(
+							new File("datafiles/unsorted/customers/customers1.txt"));
+					Customer[] array2  = HotelFileLoader.getCustomerListFromSequentialFile(
+							new File("datafiles/unsorted/customers/customers2.txt"));
+					Customer[] array = (Customer[]) ListUtilities.merge(array1, array2, duplicates);
+					System.out.println("Merged array\n");
+					for (Customer arr : array){
+						
+						System.out.println(arr.toString());
+					}
+				} catch (IOException e2) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					e2.printStackTrace();
+			
 
 				
-			
+				}		
 
 			}
 

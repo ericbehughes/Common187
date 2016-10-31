@@ -241,9 +241,6 @@ public class ListUtilities {
 				}
 			}
 				
-	 			for (Comparable arr : list3)
-	 				System.out.println(arr.toString());
-	 			System.out.println(duplicates);
 	 			return list3;
 	}
 				
