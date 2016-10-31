@@ -178,18 +178,15 @@ public class ListUtilities {
 		
 			      Comparable[] list3 =  (Comparable[]) Array.newInstance(
 			    		  list1.getClass().getComponentType(), list1.length + list2.length);
+			      
+			if (list1 == null || list2 == null)
+				return null;
 			int l1counter = 0;
 			int l2counter = 0;
-			ArrayList<String> duplicatesList = new ArrayList<String>();
-			int duplicatesCounter = 0;
-			if (list1[0] != null){
-				//if (list1[0] instanceof Reservation)
-				//	isReservation = true;
-			//	else if (list1[0] instanceof Customer)
-					//isCustomer = true;
-			}
-			else
-				return list3;
+			ArrayList<String> customerDuplicatesList = new ArrayList<String>();
+			ArrayList<String> reservationDuplicatesList = new ArrayList<String>();
+			
+			
 			
 			 for (int i =0; i < list1.length + list2.length-1; i++)
 		       {
@@ -201,8 +198,10 @@ public class ListUtilities {
 		                   l1counter++;
 		               }
 		               else if ((list1[l1counter].equals(list2[l2counter]))){
-		               		
-		               		duplicatesList.add(list1[l1counter].toString()+" (Merged)");
+		               		if (list1[l1counter] instanceof Customer)
+		               			customerDuplicatesList.add(list1[l1counter].toString()+" (Merged)");
+		               		else if (list1[l1counter] instanceof Reservation)
+		               			reservationDuplicatesList.add(list1[l1counter].toString()+" (Merged)");
 		               		
 		        				list3[i] = list1[l1counter];
 			               		l2counter++;
@@ -229,8 +228,10 @@ public class ListUtilities {
 		               }
 		           }
 		       }
-			 //list.toArray(new Reservation[list.size()]);
-			 String[] duplicatesArray = duplicatesList.toArray(new String[duplicatesList.size()]);
+			
+			 String[] duplicatesArray = customerDuplicatesList.toArray(new String[customerDuplicatesList.size()]);
+			 ListUtilities.saveListToTextFile(duplicatesArray, duplicates);
+			 duplicatesArray = reservationDuplicatesList.toArray(new String[reservationDuplicatesList.size()]);
 			 ListUtilities.saveListToTextFile(duplicatesArray, duplicates);
 			 int arrayLength= 0;
 			 for (int i = 0; i < list3.length;i++)
