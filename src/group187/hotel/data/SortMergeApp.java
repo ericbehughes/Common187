@@ -80,8 +80,29 @@ public class SortMergeApp {
 				}
 				System.out.println("record count for reservations " + ListUtilities.recordCount);
 				
+				
 				ListUtilities.sort(customerArray);
-				ListUtilities.sort(reservationArrray);
+				System.out.println("\n\nsorted array\n");
+				for (Customer arr: customerArray)
+					System.out.println(arr.toString());
+				System.out.println("\n");
+				
+				File duplicates = new File("datafiles/duplicates/duplicates.txt");
+				try {
+					duplicates.createNewFile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					Customer[] array = (Customer[]) ListUtilities.merge(customerArray, customerArray, duplicates);
+					
+					
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				
 			
