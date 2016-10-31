@@ -12,6 +12,8 @@ import group187.util.ListUtilities;
 public class SortMergeApp {
 
 	public static void main(String[] args) {
+		Customer[] customerArray = null;
+		Reservation[] reservationArrray = null;
 		// TEST getCustomerListFromSequentialFile
 					try {
 						File allCustomers = new File("datafiles/unsorted/customers/AllCustomers.txt");
@@ -20,7 +22,7 @@ public class SortMergeApp {
 						for (int count = 1; count <= 10; count++){
 							try{
 								//create list per customer text file
-									Customer[] customerArray = HotelFileLoader.getCustomerListFromSequentialFile(
+									customerArray = HotelFileLoader.getCustomerListFromSequentialFile(
 											new File("datafiles/unsorted/customers/customers" + count + ".txt"));
 									//save list to big AllCustomers.txt file
 									ListUtilities.saveListToTextFile(customerArray, allCustomers);
@@ -77,6 +79,9 @@ public class SortMergeApp {
 				
 				}
 				System.out.println("record count for reservations " + ListUtilities.recordCount);
+				
+				ListUtilities.sort(customerArray);
+				ListUtilities.sort(reservationArrray);
 
 				
 			

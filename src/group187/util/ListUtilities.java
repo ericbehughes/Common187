@@ -14,7 +14,7 @@ import dw317.hotel.business.interfaces.Reservation;
 public class ListUtilities {
 	private ListUtilities(){}
 	public static int recordCount;
-	@SuppressWarnings("null")
+	@SuppressWarnings({ "null", "rawtypes" })
 	public static void saveListToTextFile(Comparable[] array, File file) throws FileNotFoundException {
 		if (array == null)
 			throw new IllegalArgumentException("The array "+array.toString() +" is null");
