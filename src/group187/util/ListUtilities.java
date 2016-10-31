@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
@@ -132,17 +133,7 @@ public class ListUtilities {
 		return true;
 	}
     
-	/**
-	 * The method must merge two sorted object lists referenced by list1 and list2 into a third
-	object list (created in the merge method). When the lists have been merged, the merge
-	method returns a reference to the third object list. NOTE: this method must be efficient!
-	Take advantage of the fact that the two lists are already sorted!
-	In order to create the third list from within the merge method with the same base ty
-	pe as those of the arrays that you are merging, you will have to use the approach below.
-	This is necessary to ensure that you will not end up with a ClassCastException
-	when you cast the array returned from the merge array to a Customer[ ] or a
-	Reservation[] in the application class
-	 */
+	
 	/*
 	* Efficiently merges two sorted lists of objects in ascending
 	* natural order. If the duplicate objects are in both lists,
@@ -204,6 +195,9 @@ public class ListUtilities {
 		            	   list3[i] = list1[l1counter];
 		               		l2counter++;
 		               		l1counter++;
+		               		String[] array = list1[i].toString().split("\\*");
+		               		array[array.length-1]+= " (Merged)";
+		               		ListUtilities.saveListToTextFile(array, duplicates);
 		               }
 		               else{
 		                   list3[i] = list2[l2counter];
