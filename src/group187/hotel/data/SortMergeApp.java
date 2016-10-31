@@ -99,6 +99,17 @@ public class SortMergeApp {
 							new File("datafiles/unsorted/customers/customers1.txt"));
 					Customer[] array2  = HotelFileLoader.getCustomerListFromSequentialFile(
 							new File("datafiles/unsorted/customers/customers2.txt"));
+					System.out.println("non sorted array 1\n");
+					for (Customer a1: array1){
+						System.out.println(a1.toString());
+					}
+					ListUtilities.sort(array1);
+					System.out.println("sorted array 1\n");
+					for (Customer a1: array1){
+						System.out.println(a1.toString());
+					}
+						
+					ListUtilities.sort(array2);
 					Customer[] array = (Customer[]) ListUtilities.merge(array1, array2, duplicates);
 					System.out.println("Merged array\n");
 					for (Customer arr : array){

@@ -191,57 +191,41 @@ public class ListUtilities {
 			else
 				return list3;
 			
-			for (int i =0; i < list1.length + list2.length; i++)
-			{
-				if (l1counter != list1.length && l2counter != list2.length)
-				{
-					if (isReservation){
-						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) == 0){
-							String str = list1[l1counter].toString() +"(Merged)";
-							System.out.println(str);
-							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), duplicates);
-						}
-						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) < 0){
-							list3[i] = list1[l1counter];
-							l1counter++;
-						}
-						else{
-							list3[i] = list2[l2counter];
-							l2counter++;
-						}
-					
-					}
-					
-					else if (isCustomer){
-						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), duplicates);
-						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) < 0){
-							list3[i] = list1[l1counter];
-							l1counter++;
-						}
-						else{
-							list3[i] = list2[l2counter];
-							l2counter++;
-						}
-					
-					}
-				}
-				else
-				{
-					if (l1counter == list1.length)
-					{
-						list3[i] = list2[l2counter];
-						l2counter++;
-					}
-					else
-					{
-						list3[i] = list1[l1counter];
-						l1counter++;
-					}
-				}
-			}
-				
-	 			return list3;
+			 for (int i =0; i < list1.length + list2.length; i++)
+		       {
+		           if (l1counter != list1.length && l2counter != list2.length)
+		           {
+		          	 
+		               if ((list1[l1counter].compareTo(list2[l2counter])) < 0){
+		                   list3[i] = list1[l1counter];
+		                   l1counter++;
+		               }
+		               else if ((list1[l1counter].compareTo(list2[l2counter])) == 0){
+		            	   list3[i] = list1[l1counter];
+		               		l2counter++;
+		               		l1counter++;
+		               }
+		               else{
+		                   list3[i] = list2[l2counter];
+		                   l2counter++;
+		               }
+		          
+		           }
+		           else
+		           {
+		               if (l1counter == list1.length)
+		               {
+		                   list3[i] = list2[l2counter];
+		                   l2counter++;
+		               }
+		               else
+		               {
+		                   list3[i] = list1[l1counter];
+		                   l1counter++;
+		               }
+		           }
+		       }
+				 return list3;
 	}
 				
 
