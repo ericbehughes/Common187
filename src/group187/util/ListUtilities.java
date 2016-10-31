@@ -7,9 +7,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.HotelFactory;
 import dw317.hotel.business.interfaces.Reservation;
+import dw317.hotel.data.HotelFileLoader;
+import dw317.lib.Email;
+import dw317.lib.Name;
+import dw317.lib.creditcard.CreditCard;
+import dw317.lib.creditcard.CreditCard.CardType;
+import group187.hotel.business.DawsonCustomer;
 
 
 public class ListUtilities {
@@ -171,18 +180,18 @@ public class ListUtilities {
 			    		  list1.getClass().getComponentType(), list1.length + list2.length);
 			int l1counter = 0;
 			int l2counter = 0;
-			boolean isReservation = false;
-			boolean isCustomer = false;
+			ArrayList<String> duplicatesList = new ArrayList<String>();
+			int duplicatesCounter = 0;
 			if (list1[0] != null){
-				if (list1[0] instanceof Reservation)
-					isReservation = true;
-				else if (list1[0] instanceof Customer)
-					isCustomer = true;
+				//if (list1[0] instanceof Reservation)
+				//	isReservation = true;
+			//	else if (list1[0] instanceof Customer)
+					//isCustomer = true;
 			}
 			else
 				return list3;
 			
-			 for (int i =0; i < list1.length + list2.length; i++)
+			 for (int i =0; i < list1.length + list2.length-1; i++)
 		       {
 		           if (l1counter != list1.length && l2counter != list2.length)
 		           {
@@ -191,14 +200,15 @@ public class ListUtilities {
 		                   list3[i] = list1[l1counter];
 		                   l1counter++;
 		               }
-		               else if ((list1[l1counter].compareTo(list2[l2counter])) == 0){
-		            	   list3[i] = list1[l1counter];
-		               		l2counter++;
-		               		l1counter++;
-		               		String[] array = list1[i].toString().split("\\*");
-		               		array[array.length-1]+= " (Merged)";
-		               		ListUtilities.saveListToTextFile(array, duplicates);
+		               else if ((list1[l1counter].equals(list2[l2counter]))){
+		               		
+		               		duplicatesList.add(list1[l1counter].toString()+" (Merged)");
+		               		
+		        				list3[i] = list1[l1counter];
+			               		l2counter++;
+			               		l1counter++;
 		               }
+		        				
 		               else{
 		                   list3[i] = list2[l2counter];
 		                   l2counter++;
@@ -219,7 +229,17 @@ public class ListUtilities {
 		               }
 		           }
 		       }
-				 return list3;
+			 //list.toArray(new Reservation[list.size()]);
+			 String[] duplicatesArray = duplicatesList.toArray(new String[duplicatesList.size()]);
+			 ListUtilities.saveListToTextFile(duplicatesArray, duplicates);
+			 int arrayLength= 0;
+			 for (int i = 0; i < list3.length;i++)
+			 {
+				 if (list3[i] != null)
+					 arrayLength = i;
+			 }
+			 list3 = Arrays.copyOf(list3, arrayLength);
+			return list3;
 	}
 				
 
