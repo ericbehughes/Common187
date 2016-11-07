@@ -9,16 +9,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
-import dw317.hotel.business.interfaces.Customer;
-import dw317.hotel.business.interfaces.HotelFactory;
-import dw317.hotel.business.interfaces.Reservation;
-import dw317.hotel.data.HotelFileLoader;
 import dw317.lib.Email;
 import dw317.lib.Name;
-import dw317.lib.creditcard.CreditCard;
-import dw317.lib.creditcard.CreditCard.CardType;
-import group187.hotel.business.DawsonCustomer;
+
 
 
 public class ListUtilities {
@@ -183,9 +176,7 @@ public class ListUtilities {
 				return null;
 			int l1counter = 0;
 			int l2counter = 0;
-			ArrayList<String> customerDuplicatesList = new ArrayList<String>();
-			ArrayList<String> reservationDuplicatesList = new ArrayList<String>();
-			
+			ArrayList<String> duplicatesList = new ArrayList<String>();			
 			
 			
 			 for (int i =0; i < list1.length + list2.length-1; i++)
@@ -198,11 +189,7 @@ public class ListUtilities {
 		                   l1counter++;
 		               }
 		               else if ((list1[l1counter].equals(list2[l2counter]))){
-		               		if (list1[l1counter] instanceof Customer)
-		               			customerDuplicatesList.add(list1[l1counter].toString()+" (Merged)");
-		               		else if (list1[l1counter] instanceof Reservation)
-		               			reservationDuplicatesList.add(list1[l1counter].toString()+" (Merged)");
-		               		
+		               			duplicatesList.add(list1[l1counter].toString()+" (Merged)");           		
 		        				list3[i] = list1[l1counter];
 			               		l2counter++;
 			               		l1counter++;
@@ -229,9 +216,7 @@ public class ListUtilities {
 		           }
 		       }
 			
-			 String[] duplicatesArray = customerDuplicatesList.toArray(new String[customerDuplicatesList.size()]);
-			 ListUtilities.saveListToTextFile(duplicatesArray, duplicates);
-			 duplicatesArray = reservationDuplicatesList.toArray(new String[reservationDuplicatesList.size()]);
+			 String[] duplicatesArray = duplicatesList.toArray(new String[duplicatesList.size()]);
 			 ListUtilities.saveListToTextFile(duplicatesArray, duplicates);
 			 int arrayLength= 0;
 			 for (int i = 0; i < list3.length;i++)
