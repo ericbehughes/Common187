@@ -14,6 +14,7 @@ public class Email implements Serializable, Comparable<Email> {
 	/** The address. */
 	private final String address;
 	
+	
 	/**
 	 * Instantiates a new email.
 	 *
@@ -115,18 +116,6 @@ public class Email implements Serializable, Comparable<Email> {
 	 
 	
 	
-	/**
-	 * Check length.
-	 *
-	 * @param input the input
-	 * @return true, if successful
-	 */
-	private static boolean checkLength(String input) {
-		if(input.length() > 1 || input.length() < 32)
-			return false;
-		return true;
-	}
-
 	//Email must implement the compareTo method. Emails are naturally ordered by their case-insensitive host name, 
 	//followed by case-insensitive userid. So zhu@abc.com is before A@ba.com
 
@@ -173,6 +162,11 @@ public class Email implements Serializable, Comparable<Email> {
 			return thisHost.compareTo(objHost);
 		
 		
+		
+	}
+
+	public void setAddress(String string) {
+		// TODO Auto-generated method stub
 		
 	}
 }

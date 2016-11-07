@@ -1,8 +1,5 @@
 package dw317.lib;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 // TODO: Auto-generated Javadoc
 /*
  * The Name class must validate the first and last names 
