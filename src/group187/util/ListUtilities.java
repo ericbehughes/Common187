@@ -22,11 +22,12 @@ public class ListUtilities {
 			throw new FileNotFoundException("The file cannot be found");
 		PrintWriter printWriter = null;
         try {
-            printWriter = new PrintWriter(new FileOutputStream(new File(file.getPath()),true));
+            printWriter = new PrintWriter(new FileOutputStream(new File(file.getPath()),false));
             for (int i = 0; i < array.length; i++) {
             	if (array[i] == null)
             		continue;
                 printWriter.println(array[i].toString());
+                
                 recordCount++;
             }
         } catch (NullPointerException npe) {
