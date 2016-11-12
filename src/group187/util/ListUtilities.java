@@ -9,6 +9,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
+
 
 
 public class ListUtilities {
@@ -103,9 +106,18 @@ public class ListUtilities {
          for(int i = 0; i < list.length; i++)
          {
               smallindex = i; // set first element as smallest
-              for(int j = i + 1; j < list.length; j++) // find smallest
+              for(int j = i + 1; j < list.length; j++){ // find smallest
+            	  if (list[j] instanceof Customer){
                    if(list[j].compareTo(list[smallindex]) < 0)
                         smallindex = j;
+            	  }
+                  else if (list[j] instanceof Reservation){
+                	   if(list[j].compareTo(list[smallindex]) > 0)
+                           smallindex = j;
+                  }
+                	   
+
+              }
               if(smallindex != i)
                    swap(list, smallindex, i);
          }
