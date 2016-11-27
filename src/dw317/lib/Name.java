@@ -1,5 +1,7 @@
 package dw317.lib;
 
+import java.io.Serializable;
+
 // TODO: Auto-generated Javadoc
 /*
  * The Name class must validate the first and last names 
@@ -14,7 +16,7 @@ package dw317.lib;
 /**
  * The Class Name.
  */
-public class Name 
+public class Name implements Serializable
 {
 	
 
