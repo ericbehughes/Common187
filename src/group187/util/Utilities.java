@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 public class Utilities {
 	
-	private Utilities(){
+	private Utilities() {
 		
 	}
 	public static void serializeObject(Object object, String fileSpecification) throws IOException
@@ -16,10 +16,9 @@ public class Utilities {
 			out = new ObjectOutputStream (new FileOutputStream (fileSpecification));
 			out.writeObject (object);
 		}
-	
+
 		catch (IOException e){
 			throw new IOException("Error serializing object to \n" + fileSpecification + " " + e);
-		
 		}
 		
 		finally {
@@ -27,7 +26,7 @@ public class Utilities {
 				out.close();
 		}
 	}
-	
+
 	public static Object deserializeObject (String fileSpecification) throws IOException, ClassNotFoundException
 	{
 		ObjectInputStream in = null;
